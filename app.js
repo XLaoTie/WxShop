@@ -79,8 +79,10 @@ App({
   },
   globalData: {
     userInfo: null,
-    userOpenId:null,
+    userOpenId:'undefined',
+  
     url:"http://localhost/snooke/index.php?r=WxShop/",
+    imgUrl: 'http://localhost/snooke/uploads/image/',
     okayapiHost: "http://test_phalapi.com", // TODO: 配置成你所在的接口域名
     okayApiAppKey: "appkey", // TODO：改为你的APP_KEY 在http://open.yesapi.cn/?r=App/Mine寻找
     okayApiAppSecrect: "appsecret" // TODO：改为你的APP_SECRECT

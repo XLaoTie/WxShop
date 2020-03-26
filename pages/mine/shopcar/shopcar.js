@@ -9,7 +9,7 @@ Page({
     newsList: [],
     orders: [],
     shopcar: [],
-
+  
     lastid: 0,
     toastHidden: true,
     confirmHidden: true,
@@ -48,8 +48,9 @@ Page({
 
     wx.request({
       header: utils.requestHeader(),
-      url: getApp().globalData.okayapiHost,
-      data: okayapi.enryptData(params),
+      url: app.globalData.url + "QueryMyShopCar&user_identify='" +app.globalData.openid+"'",
+      method:"Get",
+      //data: okayapi.enryptData(params),
 
       success: (res) => {
         let data = res.data.data.items;
@@ -58,7 +59,8 @@ Page({
         for (let i = 0; i < data.length; i++) {
 
           shopcar.push({
-            tea_id: data[i].tea_id,
+            imgurl: app.globalData.imgUrl + 'goods/',
+            goods_id: data[i].goods_id,
             good_title: data[i].good_title,
             good_img: data[i].good_img,
             good_price: data[i].good_price

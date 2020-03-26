@@ -2,7 +2,7 @@ import S_request from '../../../../utils/requestService.js';
 import * as utils from '../../../../utils/util.js';
 import CONFIG from '../../../../config.js';
 let okayapi = require('../../../../utils/okayapi.js')
-
+var app = getApp()
 Page({
   data: {
     list: [
@@ -44,11 +44,14 @@ Page({
 
     wx.request({
       header: utils.requestHeader(),
-      url: getApp().globalData.okayapiHost,
-      data: okayapi.enryptData(params),
+      url: getApp().globalData.url +'QueryMyOrderList&order_id='+e.id,
+      //data: okayapi.enryptData(params),
+      
+      method:'GET',
+      
       success: (res) => {
         let data = res.data.data.orders;
-
+       
         list[0].pages[0] = data[0].order_goods;
         list[0].pages[1] = "x" + data[0].order_goods_num;
         list[0].pages[2] = "￥" + data[0].order_price; 

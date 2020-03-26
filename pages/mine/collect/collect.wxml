@@ -17,7 +17,7 @@
             <template name="itmes">
               <view data-id="{{id}}" bindtap="showOrderDetailPage" hover-class="navigator-hover">
                 <view class="imgs">
-                  <image src="{{order_img}}" class="in-img" background-size="cover" model="scaleToFill"></image>
+                  <image src="{{imgurl+order_img}}" class="in-img" background-size="cover" model="scaleToFill"></image>
                 </view>
                 <view class="infos">
                   <view class="title">{{order_goods}}</view>
@@ -41,7 +41,7 @@
             <template name="itmesPay">
               <navigator hover-class="navigator-hover">
                 <view class="imgs">
-                  <image src="{{order_img}}" class="in-img" background-size="cover" model="scaleToFill"></image>
+                  <image src="{{imgurl+order_img}}" class="in-img" background-size="cover" model="scaleToFill"></image>
                 </view>
                 <view class="infos">
                   <view class="title">{{order_goods}}</view>
@@ -65,7 +65,7 @@
             <template name="itmesWaitToSend">
               <navigator hover-class="navigator-hover">
                 <view class="imgs">
-                  <image src="{{order_img}}" class="in-img" background-size="cover" model="scaleToFill"></image>
+                  <image src="{{imgurl+order_img}}" class="in-img" background-size="cover" model="scaleToFill"></image>
                 </view>
                 <view class="infos">
                   <view class="title">{{order_goods}}</view>
@@ -88,7 +88,7 @@
             <template name="itmesSend">
               <navigator hover-class="navigator-hover">
                 <view class="imgs">
-                  <image src="{{order_img}}" class="in-img" background-size="cover" model="scaleToFill"></image>
+                  <image src="{{imgurl+order_img}}" class="in-img" background-size="cover" model="scaleToFill"></image>
                 </view>
                 <view class="infos">
                   <view class="title">{{order_goods}}</view>

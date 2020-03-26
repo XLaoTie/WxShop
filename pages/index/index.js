@@ -15,7 +15,8 @@ Page({
     interval: 5000,
     duration: 1000,
     swiperData: [],
-
+    url1:"",
+    url2:"",
     //列表数据
     goodsData: [],
     collect: {
@@ -63,6 +64,8 @@ Page({
       this.setData({
         goodsData: goodsData,
         swiperData: swiperData,
+        url1: app.globalData.imgUrl + 'advertisement/',
+        url2: app.globalData.imgUrl + 'goods/',
       });
 
       curPageNumber += 1;

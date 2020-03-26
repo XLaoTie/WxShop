@@ -13,11 +13,11 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "潮峰茶行",
+    "navigationBarTitleText": "海鲜捞商城",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "backgroundColor": "#21a675",
+    "backgroundColor": "#00008B",
     "color": "#dbdcdc",
     "selectedColor": "#f1e63b",
     "borderStyle": "black",
@@ -30,7 +30,13 @@
       },
       {
         "pagePath": "pages/main/main",
-        "text": "发现",
+        "text": "新上市",
+        "iconPath": "resource/images/tabbar_cart.png",
+        "selectedIconPath": "resource/images/tabbar_cart_selected.png"
+      },
+      {
+        "pagePath": "pages/main/main",
+        "text": "目录",
         "iconPath": "resource/images/tabbar_cart.png",
         "selectedIconPath": "resource/images/tabbar_cart_selected.png"
       },

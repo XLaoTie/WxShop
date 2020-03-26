@@ -51,7 +51,7 @@ Page({
       systemInfo: app.getSystemInfo()
     })
 
-    this.getMoment()
+    //this.getMoment()
     // this.bindLoding()
     //that.onloadRequest()
 
@@ -71,8 +71,8 @@ Page({
 
     wx.request({
       header: utils.requestHeader(),
-      url: getApp().globalData.okayapiHost,
-      data: okayapi.enryptData(params),
+      url: app.globalData.url + 'QueryMomentList&page=' + that.data.curPageNumber+'&perpage=5',
+      //data: okayapi.enryptData(params),
       success: (res) => {
         let data = res.data.data.items;
 
@@ -151,8 +151,8 @@ Page({
 
     wx.request({
       header: utils.requestHeader(),
-      url: getApp().globalData.okayapiHost,
-      data: okayapi.enryptData(params),
+      url: app.globalData.url + 'QueryMomentList&page=1&perpage=5',
+     // data: okayapi.enryptData(params),
       success: (res) => {
         let data = res.data.data.items;
 

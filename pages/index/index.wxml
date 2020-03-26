@@ -7,7 +7,7 @@
             duration="{{duration}}" circular='true' style="height:{{pageSetting.swiperHeight}}rpx">
         <block wx:for="{{swiperData}}">
             <swiper-item>
-                <image src="{{item.imgUrl}}" class="swiper-image" mode="scaleToFill"/>
+                <image src="{{url1+item.imgUrl}}" class="swiper-image" mode="scaleToFill"/>
             </swiper-item>
         </block>
     </swiper>
@@ -17,7 +17,7 @@
                 <view class="index-goods-item" data-id="{{item.id}}" bindtap="showGoodsDetailPage">
 
                     <view data-id="{{item.id}}" bindtap="showGoodsDetailPage" class="index-goods-img-view">
-                        <image src="{{item.goods_img}}" mode="aspectFit" class="index-goods-img"></image>
+                        <image src="{{url2+item.goods_img}}" mode="aspectFit" class="index-goods-img"></image>
                     </view>
 
                     <view class="index-goods-text-view">

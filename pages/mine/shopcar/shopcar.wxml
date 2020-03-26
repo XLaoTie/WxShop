@@ -7,9 +7,9 @@
 
   <!--文章列表模板 begin-->
   <template name="itmes">
-    <view data-id='{{tea_id}}' bindtap="showGoodsDetailPage" hover-class="navigator-hover">
+    <view data-id='{{goods_id}}' bindtap="showGoodsDetailPage" hover-class="navigator-hover">
       <view class="imgs">
-        <image src="{{good_img}}" class="in-img" background-size="cover" model="scaleToFill"></image>
+        <image src="{{imgurl+good_img}}" class="in-img" background-size="cover" model="scaleToFill"></image>
       </view>
       <view class="infos">
         <view class="title">{{good_title}}</view>

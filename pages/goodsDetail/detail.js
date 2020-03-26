@@ -37,12 +37,16 @@ Page({
     imgList: {},//照片列表
     goodsData: {}, //商品详情
     goodsNumberInput: 1, //购买数量
-
+    //图片路径
+    url:'',
     //输入备注内容
     content: '',
     contentlength: 0,
   },
   onLoad: function(e) {
+    this.setData({
+      url: app.globalData.imgUrl + 'goods/'
+    })
     this.goodsDetailInit(e);
     this.setSwiperHeight();
     // this.getMatchGoods(e);
@@ -57,9 +61,9 @@ Page({
   //初始化 商品详情
   goodsDetailInit: function(e) {
 
-    let swiperData = [];
+    //let swiperData = [];
     let imgList = [];
-
+   
     wx.request({
       header: utils.requestHeader(),
       
@@ -69,25 +73,27 @@ Page({
         let data = res.data.data.detail;
        
         //循环拿出所有照片放进数组 没有图片地址或者等于最大位置时停止
-        for (let i = 1; data['goods_picture' + i] != "" && data['goods_picture' + i] != null; i++) {
+        // for (let i = 1; data['goods_picture' + i] != "" && data['goods_picture' + i] != null; i++) {
           
-          swiperData.push({
-            imgUrl: data['goods_picture' + i],
-          })
-        }
+        //   swiperData.push({
+        //     imgUrl: data['goods_picture' + i],
+        //   })
+        // }
         
-        for (let i = 1; data['goods_presentation_img' + i] != "" && data['goods_presentation_img' + i] != null; i++) {
-          imgList.push({
-            imgUrl: data['goods_presentation_img' + i],
-          })
-        }
+        // for (let i = 1; data['goods_presentation_img' + i] != "" && data['goods_presentation_img' + i] != null; i++) {
+        //   imgList.push({
+        //     imgUrl: data['goods_presentation_img' + i],
+        //   })
+        // }
+    
         //console.log(swiperData);
         this.setData({
           goodsData: data,
-          swiperData: swiperData,
-          imgList: imgList,
+          swiperData: data['goods_picture'].split(","),
+          imgList: data['goods_presentation_img'].split(","),
+          
         });
-
+   
       },
       fail: (err) => {
         console.log('error', err);
@@ -141,11 +147,7 @@ Page({
   //加入购物车
   joinCart: function(e) {
     console.log(e.currentTarget.dataset.id);
-    let params = {
-      s: "App.PhalApi_MiniTea_Tea.AddToShopCar", // 必须，待请求的接口服务名称
-      //Jason格式传入的写法
 
-    };
     //用户按了允许授权按钮
     var that = this;
     //插入登录的用户的相关信息到数据库
@@ -154,7 +156,7 @@ Page({
       url: app.globalData.url +'AddToShopcar',
       method: "POST",
       data: {
-        user_identify: getApp().globalData.openid,
+        user_identify: getApp().globalData.userOpenId,
         goods_id: e.currentTarget.dataset.id,
         car_identify_new: getApp().globalData.openid + e.currentTarget.dataset.id,
         good_img: e.currentTarget.dataset.goods_titlepage,
@@ -190,11 +192,10 @@ Page({
   //购买发送订单到那里
   details_bot_opts: function(e, id) {
     let goodsnumber = this.data.goodsNumberInput,
-      orderPrice = this.data.goodsData.tea_price * goodsnumber;
+      orderPrice = this.data.goodsData.goods_price * goodsnumber;
     // var date = getDate();
     var timestamp = Date.parse(new Date());
-    var newDate = new Date();
-
+    
     //订单地址判定
     if (this.data.addressInfo == null || this.data.addressInfo == {}) {
       wx.showToast({
@@ -205,24 +206,31 @@ Page({
       let params = {
         s: "App.PhalApi_MiniTea_Tea.CreateNewOrder", // 必须，待请求的接口服务名称
         //Jason格式传入的写法
-        order_buyer: this.data.addressInfo.userName,
-        order_location: this.data.addressInfo.provinceName + this.data.addressInfo.cityName + this.data.addressInfo.countyName + this.data.addressInfo.detailInfo,
-        order_price: orderPrice,
-        order_goods: this.data.goodsData.tea_name,
-        order_good_id: this.data.goodsData.id,
-        order_img: this.data.goodsData.tea_titlepage,
-        order_remark: this.data.content,
-        order_mobile: this.data.addressInfo.telNumber,
-        order_identify: getApp().globalData.openid,
-        order_goods_num: goodsnumber,
+ 
       };
       //用户按了允许授权按钮
       var that = this;
       //插入登录的用户的相关信息到数据库
       wx.request({
         header: utils.requestHeader(),
-        url: getApp().globalData.okayapiHost,
-        data: okayapi.enryptData(params),
+        url: app.globalData.url +'CreateNewOrder',
+        method:'POST',
+        data:{
+          order_buyer: this.data.addressInfo.userName,
+          order_location: this.data.addressInfo.provinceName + this.data.addressInfo.cityName + this.data.addressInfo.countyName + this.data.addressInfo.detailInfo,
+          order_price: orderPrice,
+          order_goods: this.data.goodsData.goods_name,
+          order_good_id: this.data.goodsData.id,
+          order_img: this.data.goodsData.goods_titlepage,
+          order_remark: this.data.content,
+          order_mobile: this.data.addressInfo.telNumber,
+          order_identify: getApp().globalData.userOpenId,
+          order_goods_num: goodsnumber,
+
+
+        },
+
+
         success: function(res) {
           wx.showToast({
             title: "下单成功！",
@@ -233,30 +241,30 @@ Page({
             wx.hideLoading()
           }, 2000)
 
-          setTimeout(function() {
-            wx.navigateTo({
-              url: "/pages/mine/collect/collectDetail/collectDetail?id=" + res.data.data.order_id
-            })
-          }, 2000);
+          // setTimeout(function() {
+          //   wx.navigateTo({
+          //     url: "/pages/mine/collect/collectDetail/collectDetail?id=" + res.data.data.order_id
+          //   })
+          // }, 2000);
 
-          let params = {
-            s: "App.PhalApi_MiniTea_Tea.QueryMyOrderList", // 必须，待请求的接口服务名称
-            order_identify: getApp().globalData.openid,
-          };
+          // let params = {
+          //   s: "App.PhalApi_MiniTea_Tea.QueryMyOrderList", // 必须，待请求的接口服务名称
+          //   order_identify: getApp().globalData.openid,
+          // };
 
-          wx.request({
-            header: utils.requestHeader(),
-            url: getApp().globalData.okayapiHost,
-            data: okayapi.enryptData(params),
+          // wx.request({
+          //   header: utils.requestHeader(),
+          //   url: getApp().globalData.okayapiHost,
+          //   data: okayapi.enryptData(params),
 
-            success: (res) => {
-              console.log(res)
-            },
-            fail: (err) => {
-              err.statusCode = CONFIG.CODE.REQUESTERROR;
-              typeof cb == "function" && cb(err);
-            }
-          })
+          //   success: (res) => {
+          //     console.log(res)
+          //   },
+          //   fail: (err) => {
+          //     err.statusCode = CONFIG.CODE.REQUESTERROR;
+          //     typeof cb == "function" && cb(err);
+          //   }
+          // })
 
         },
         fail: (err) => {

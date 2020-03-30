@@ -9,7 +9,8 @@ Page({
     newsList: [],
     orders: [],
     shopcar: [],
-  
+    choose: [],
+    chooseprice:[],
     lastid: 0,
     toastHidden: true,
     confirmHidden: true,
@@ -20,6 +21,19 @@ Page({
     url: 'url',
     img: '',
   },
+
+
+  checkboxChange: function (e) {
+    console.log('radio发生change事件，携带value值为：', e.detail)
+    this.setData({
+      choose: e.detail,
+    })
+  },
+  openCartPage: function () {
+    //打开选择属性页面
+    console.log('当前选中', this.data.choose)
+  },
+
 
   //跳转商品详情页
   showGoodsDetailPage: function (e) {
@@ -79,6 +93,7 @@ Page({
 
   },
 
+  
   loadMore: function (event) {
   },
   onLoad: function () {

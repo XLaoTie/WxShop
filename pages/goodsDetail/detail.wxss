@@ -471,7 +471,7 @@
 .join_shopping_cart_view .goods_info .item_info {
   position: relative;
   flex: 1;
-  font-size: 0.6rem;
+  font-size: 1.0rem;
   margin-left: 0.75rem;
 }
 
@@ -493,7 +493,7 @@
 }
 
 .join_shopping_cart_view .goods_info .item_info .selece_text_flag {
-  color: #f1e63b;
+  color: #f13b3b;
   display: block;
   margin-top: 0.3rem;
 }
@@ -504,7 +504,8 @@
 }
 
 .join_shopping_cart_view .goods_info .item_info .row .price {
-  color: #f1e63b;
+  color: #f13b3b;
+  font-size: 1.2rem;
 }
 
 .join_shopping_cart_view .goods_info .item_info .row .text {

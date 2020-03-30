@@ -8,23 +8,40 @@
   <!--文章列表模板 begin-->
   <template name="itmes">
     <view data-id='{{goods_id}}' bindtap="showGoodsDetailPage" hover-class="navigator-hover">
+    <view class="list">
       <view class="imgs">
         <image src="{{imgurl+good_img}}" class="in-img" background-size="cover" model="scaleToFill"></image>
       </view>
-      <view class="infos">
+      <view class="list">
         <view class="title">{{good_title}}</view>
-        <view>
-          <view class="status">￥{{good_price}}</view>
-        </view>
       </view>
+      <view class="status">￥{{good_price}}</view>
+
+    </view>
     </view>
   </template>
   <!--文章列表模板 end-->
-
   <!--循环输出列表 begin-->
-  <view wx:for="{{shopcar}}" class="list">
-    <template is="itmes" data="{{...item}}" />
-  </view>
+  <checkbox-group bindchange="checkboxChange">
+    <checkbox  wx:for-items="{{shopcar}}"  value="{{item.goods_id}}">
+      <template is="itmes" data="{{...item}}" />
+    </checkbox >
+  </checkbox-group>
+  <!--循环输出列表 begin-->
+  <!-- <radio-group class="radio-group" bindchange="radioChange">
+    <radio  wx:for="{{shopcar}}"  checked="{{shop.checked}}">
+      <template is="itmes" data="{{...item}}" />
+    </radio>
+  </radio-group> -->
+
+<view class="goods-detail-bot-btn">
+    <view class="goods-detail-bot-btn-joinCart" data-id="{{goodsData.id}}" data-goods_titlepage="{{goodsData.goods_titlepage}}" data-goods_name="{{goodsData.goods_name}}" data-goods_price="{{goodsData.goods_price}}" catchtap="joinCart">
+      取消
+    </view>
+    <view class="goods-detail-bot-btn-buyNow" catchtap="openCartPage">
+      结账
+    </view>
+</view>
 
 
   <view bindtap="loadMore" data-lastid="{{lastid}}" data-isfrist="{{isfrist}}" class="loadMore" style="display:{{moreHidden}}">加载更多</view>

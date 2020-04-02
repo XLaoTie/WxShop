@@ -1,0 +1,28 @@
+<navbar page-name="分类" show-nav="{{showNav}}" show-home="{{showHome}}"show-brand="{{showBrand}}"></navbar>
+<view class="section">
+    <!-- 左侧类型 -->
+    <scroll-view scroll-y="true" class="left">
+        <view wx:for="{{types}}" wx:key="typeId" data-type="{{item}}" bindtap="tapType" class="{{item == currType ? 'active' : ''}}" style="font-size:33rpx">
+            {{item}}
+        </view>
+    </scroll-view>
+
+    <!-- 右侧数据 -->
+    <scroll-view scroll-y="true" class="right">
+        <view class="typeTree">
+            <view  class="brand" wx:for="{{currGoods}}" wx:for-item="data">
+
+                <navigator url="../goodsDetail/detail?id={{data.id}}" wx:key="typeId" class="item">
+                    <image src="{{imgurl+data.img}}"></image>
+                    <view class="title">
+                    <text>{{data.name}}</text>
+                    </view>
+                    <view>
+                    <text class="price">{{data.price}}</text>
+                    </view>
+                </navigator>
+                    
+            </view>
+        </view>
+    </scroll-view>
+</view>

@@ -5,6 +5,9 @@ let okayapi = require('../../../../utils/okayapi.js')
 var app = getApp()
 Page({
   data: {
+    showNav: true,
+    showHome: false,
+    showBrand: false,
     list: [
       {
         id: 'form',

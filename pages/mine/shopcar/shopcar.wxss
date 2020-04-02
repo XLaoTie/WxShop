@@ -1,148 +1,205 @@
+/*外部容器*/
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	box-sizing: border-box;
+} 
 
-.warp{
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 20rpx;
-}
-navigator { overflow: hidden;}
-
-.list { margin-bottom: 0rpx;height: 200rpx;position: relative;}
-.imgs {float: left;}
-.imgs image {display: block; width: 200rpx;height: 200rpx;border-radius: 8px;position: relative;}
-
-.infos {float: left; width: 450rpx; height: 200rpx;padding: 20rpx 0 0 20rpx;}
-.title {font-size: 20px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  word-break: break-all;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;}
-.date {font-size: 16px;color: rgb(43, 153, 61); position: absolute;bottom: 0;}
-.date view{float: left}
-.view{float:left;font-size: 12px;color: rgb(172, 170, 170);position: absolute;bottom: 0;text-align: right;
-}
-.status{font-size: 15px;color: rgb(228, 40, 7);position: absolute;bottom: 0;margin-left: 200rpx;
-}
-.loadMore {text-align: center;margin: 30px;color: #aaa;font-size: 16px}
-
-.search-bar{
-    width:100%;
-    height:100rpx;
-    top:0;
-    background: #ffffff;
+/*整体列表*/
+.carts-list {
+	display: flex;
+	flex-direction: column;
+	padding-left: 40rpx;
+	margin-bottom: 80rpx;
 }
 
-.search-bar-warper{
-    background:#f0eded;
-    height:80rpx;
-    margin:0 20rpx;
-    border-radius: 10rpx;
-    padding-left: 20rpx;
-    align-items: center;
-    display: flex;
-    /*width:100%;*/
-}
-.aloha{text-align: center;}
-
-
-.goods-detail-bot-btn {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  display: flex;
-  background: rgb(250, 250, 250);
-  height: 2.9rem;
-  width: 100%;
+/*每行单元格*/
+.carts-item {
+	display: flex;
+	flex-direction: row;
+	height:150rpx;
+	/*width属性解决标题文字太短而缩略图偏移*/
+	width:100%;
+	border-bottom: 1px solid #eee;
+	padding: 30rpx 0;
+	margin-right: 40rpx;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: white;
+	z-index: 99;
 }
 
-.goods-detail-bot-btn-contact {
-  width: 30%;
+/*item与button的容器*/
+.carts-container {
+	position: relative;
+	width: 100%;
+	height: 90px;
 }
 
-.goods-detail-bot-btn-contact-btn {
-  background-color: none;
-  border: none;
-  display: table-cell;
-  line-height: 2.9rem; /*设置line-height与父级元素的height相等*/
-  text-align: center; /*设置文本水平居中*/
+/*左部图片*/
+.carts-image {
+	width:150rpx;
+	height:150rpx;
 }
 
-.goods-detail-bot-btn-contact-btn::after {
-  border: none;
+
+/*右部描述*/
+.carts-text {
+	margin-left: 10rpx;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
-.goods-detail-bot-btn-joinCart {
-  width: 50%;
-  background-color: rgba(1, 179, 250, 0.911);
-  display: table-cell;
-  color: white;
-  line-height: 2rem; /*设置line-height与父级元素的height相等*/
-  text-align: center; /*设置文本水平居中*/
-  overflow: hidden; /*防止内容超出容器或者产生自动换行*/
-  border: rgba(204, 204, 204, 0) solid 5px;
-  border-top-left-radius: 1.45rem;
-  border-bottom-left-radius: 1.45rem;
-  border-right: none;
-  margin-top: 0.3rem;
-  margin-bottom: 0.3rem;
+/*右上部分标题*/
+.carts-title {
+	font-size: 28rpx;
+	color: #444;
+	line-height: 38rpx;
 }
 
-.goods-detail-bot-btn-buyNow {
-  width: 50%;
-  background-color: rgba(255, 88, 10, 0.986);
-  display: table-cell;
-  color: white;
-  line-height: 2rem; /*设置line-height与父级元素的height相等*/
-  text-align: center; /*设置文本水平居中*/
-  overflow: hidden; /*防止内容超出容器或者产生自动换行*/
-  border: rgba(204, 204, 204, 0) solid 5px;
-  border-top-right-radius: 1.45rem;
-  border-bottom-right-radius: 1.45rem;
-  border-left: none;
-  margin-top: 0.3rem;
-  margin-bottom: 0.3rem;
+/*右下部分价格与数量*/
+.carts-subtitle {
+	font-size: 25rpx;
+	color:darkgray;
+	padding: 0 20rpx;
+	display: flex;
+	flex-direction: row;
+	justify-content:space-between;
 }
 
-.goods-detail-bot-btn-blank {
-  width: 70%;
+/*价格*/
+.carts-price {
+	color: #f60;
+	font-size:14px;
+	line-height: 22px;
 }
 
-.Order-blank-num {
-  font-size: 13px;
-  font-weight: lighter;
+/*人民币符号*/
+.carts-price:before, .select-and-amount text:last-child:before {
+	content: '￥';	
 }
 
-.Order-blank-price {
-  font-size: 16px;
-  color: orangered;
+/*商品加减按钮*/
+/*stepper容器*/
+.stepper {
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	width: 70px;
+	height: 26px;
+	margin:0 auto;
 }
 
-.goods-detail-bot-btn-Order-blank {
-  width: 70%;
-  text-align: right;
-  padding-bottom: 0;
-  line-height: 2.9rem;
-  overflow: hidden;
+
+/*加号与减号*/
+.stepper text {
+	width: 19px;
+	line-height: 26px;
+	text-align: center;
+	float: left;
 }
 
-.goods-detail-bot-btn-Order {
-  width: 30%;
-  background-color: rgba(255, 88, 10, 0.986);
-  display: table-cell;
-  color: white;
-  line-height: 2.9rem; /*设置line-height与父级元素的height相等*/
-  text-align: center; /*设置文本水平居中*/
-  overflow: hidden; /*防止内容超出容器或者产生自动换行*/
+/*数值*/
+.stepper input {
+	color: black;
+	float: left;
+	margin: 0 auto;
+	width: 30px;
+	height: 26px;
+	text-align: center;
+	font-size: 12px;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
 }
 
-.goods-detail-bot-btn .btn.joinCart {
-  background: #000;
+/*普通样式*/
+.stepper .normal{
+	color: black;
 }
 
-.goods-detail-bot-btn .btn.joinCart.off {
-  background: #ccc;
+/*禁用样式*/
+.stepper .disabled{
+	color: #ccc;
+}
+
+/*复选框样式*/
+.carts-list icon {
+	margin-top: 60rpx;
+	margin-right: 20rpx;
+}
+
+/*底部按钮*/
+.carts-footer {
+	width: 100%;
+	height: 80rpx;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	position: fixed;
+	bottom: 0;
+	border-top: 1px solid #eee;
+	background: white;
+}
+
+.select-and-amount {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+/*复选框*/
+.carts-footer icon {
+	margin-left: 20rpx;
+	display: block;
+}
+
+/*全选字样*/
+.carts-footer text {
+	font-size: 30rpx;
+	margin-left: 8rpx;
+	/*line-height: 10rpx;*/
+	display: block;
+}
+
+/*立即结算按钮*/
+.carts-footer .button {
+	line-height: 80rpx;
+	text-align: center;
+	width:220rpx;
+	height: 80rpx;
+	background-color: #f60;
+	color: white;
+	font-size: 36rpx;
+	border-radius: 0;
+	border: 0;
+}
+
+/*删除按钮*/
+.carts-footer .delete {
+	height: 80rpx;
+	width: 200rpx;
+	text-align: right;
+	line-height: 80rpx;
+	color: #fc9326;
+}
+
+/*删除按钮*/
+.delete-button {
+	width: 60px;
+	font-size: 16px;
+	height: 99%;
+	line-height: 90px;
+	border: 0;
+	border-radius: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.delete-button:before {
+	border: 0;
 }

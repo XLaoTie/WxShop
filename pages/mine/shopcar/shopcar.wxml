@@ -1,50 +1,41 @@
-<!--order.wxml-->
-
-<view class="warp">
-  <!--<open-data type="userAvatarUrl"></open-data>
-<open-data type="userNickName"></open-data>-->
-
-
-  <!--文章列表模板 begin-->
-  <template name="itmes">
-    <view data-id='{{goods_id}}' bindtap="showGoodsDetailPage" hover-class="navigator-hover">
-    <view class="list">
-      <view class="imgs">
-        <image src="{{imgurl+good_img}}" class="in-img" background-size="cover" model="scaleToFill"></image>
-      </view>
-      <view class="list">
-        <view class="title">{{good_title}}</view>
-      </view>
-      <view class="status">￥{{good_price}}</view>
-
-    </view>
-    </view>
-  </template>
-  <!--文章列表模板 end-->
-  <!--循环输出列表 begin-->
-  <checkbox-group bindchange="checkboxChange">
-    <checkbox  wx:for-items="{{shopcar}}"  value="{{item.goods_id}}">
-      <template is="itmes" data="{{...item}}" />
-    </checkbox >
-  </checkbox-group>
-  <!--循环输出列表 begin-->
-  <!-- <radio-group class="radio-group" bindchange="radioChange">
-    <radio  wx:for="{{shopcar}}"  checked="{{shop.checked}}">
-      <template is="itmes" data="{{...item}}" />
-    </radio>
-  </radio-group> -->
-
-<view class="goods-detail-bot-btn">
-    <view class="goods-detail-bot-btn-joinCart" data-id="{{goodsData.id}}" data-goods_titlepage="{{goodsData.goods_titlepage}}" data-goods_name="{{goodsData.goods_name}}" data-goods_price="{{goodsData.goods_price}}" catchtap="joinCart">
-      取消
-    </view>
-    <view class="goods-detail-bot-btn-buyNow" catchtap="openCartPage">
-      结账
+<navbar page-name="购物车" show-nav="{{showNav}}" show-home="{{showHome}}"show-brand="{{showBrand}}"></navbar>
+<view class="container carts-list">
+    <view wx:for="{{carts}}" class="carts-container" wx:key="index" bindtap="showGoods" data-object-id="{{item.objectId}}">
+    	<view class="carts-item" style="left: {{itemLefts[index]}}px;" data-index="{{index}}" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd">
+	    	<!-- 复选框图标 -->
+			<icon type="{{item.selected ? 'success_circle' : 'circle'}}" size="20" catchtap="bindCheckbox" data-index="{{index}}"/>
+			<view>
+			<!-- 缩略图 -->
+				<image class="carts-image" src="{{imgurl+item.avatar}}" mode="aspectFill"/>
+			</view>
+			<view class="carts-text">
+				<!-- 商品标题 -->
+				<text class="carts-title">{{item.title}}</text>
+				<view class="carts-subtitle">
+				<!-- 价格 -->
+				  	<text class="carts-price">{{item.price}}</text>
+				  	<!-- 数量加减 -->
+				  	<view>
+				      <view class="stepper">
+						<!-- 减号 -->
+						<text class="{{minusStatuses[index]}}" data-index="{{index}}" catchtap="bindMinus">-</text>
+						<!-- 数值 -->
+						<input type="number" data-index="{{index}}" catchchange="bindManual" catchtap="bindManualTapped" value="{{item.quantity}}" />
+						<!-- 加号 -->
+						<text class="normal" data-index="{{index}}" catchtap="bindPlus">+</text>
+					  </view>
+				  	</view>
+				</view>
+			</view>
+      	</view>
+      	<button type="warn" class="delete-button" catchtap="delete" data-object-id="{{item.objectId}}">删除</button>
     </view>
 </view>
-
-
-  <view bindtap="loadMore" data-lastid="{{lastid}}" data-isfrist="{{isfrist}}" class="loadMore" style="display:{{moreHidden}}">加载更多</view>
-  <toast hidden="{{toastHidden}}" bindchange="toastChange" duration="3000">{{msg}}</toast>
-  <modal title="温馨提示" no-cancel hidden="{{confirmHidden}}" confirm-text="明确" bindconfirm="modalChange">你当前不在在WIFI网格下下，会产生流量费用</modal>
+<view class="carts-footer">
+	<view class="select-and-amount" bindtap="bindSelectAll">
+		<icon type="{{selectedAllStatus ? 'success_circle' : 'circle'}}" size="18"/>
+		<text>全选</text>
+		<text>{{total}}</text>
+	</view>
+	<view class="button" bindtap="bindCheckout">立即结算</view>
 </view>

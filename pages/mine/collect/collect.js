@@ -6,6 +6,10 @@ let okayapi = require('../../../utils/okayapi.js')
 var app = getApp()
 Page({
   data: {
+    showNav: true,
+    showHome: false,
+    showBrand: false,
+
     url1: app.globalData.imgUrl + 'goods/',
     tabs: ["全部", "待付款", "待发货", "已发货"],
     activeIndex: 0,

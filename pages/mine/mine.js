@@ -1,5 +1,9 @@
 Page({
-
+  data:{
+    showNav: false,
+    showHome: false,
+    showBrand: true,
+  },
 
   openlocation: function () {
     wx.openLocation({

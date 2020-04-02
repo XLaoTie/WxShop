@@ -1,3 +1,5 @@
+<navbar page-name="商品详情" show-nav="{{showNav}}" show-home="{{showHome}}"show-brand="{{showBrand}}"></navbar>
+
 <view class="container paddingBottom3" style="display: {{loading.isViewHidden ? 'none' : 'block'}}">
 
   <!-- 轮滑图 -->
@@ -37,7 +39,8 @@
     <view class="goods-detail-bot-btn-joinCart" data-id="{{goodsData.id}}" data-goods_titlepage="{{goodsData.goods_titlepage}}" data-goods_name="{{goodsData.goods_name}}" data-goods_price="{{goodsData.goods_price}}" catchtap="joinCart">
       加入购物车
     </view>
-    <view class="goods-detail-bot-btn-buyNow" catchtap="openCartPage">
+    <!-- openCartPage -->
+    <view class="goods-detail-bot-btn-buyNow" catchtap="clickme">
       立即购买
     </view>
   </view>
@@ -50,9 +53,6 @@
 
 <!-- 加入购物车 -->
 <scroll-view animation="{{animationData}}" class="join_shopping_cart_view" scroll-y="true">
-
-
-
 
 
   <!-- address -->
@@ -100,14 +100,7 @@
         <textarea class="weui-textarea" name="content" value='{{content}}' style='height:60px;' bindinput="listenercontent" placeholder="选填，请先和商家协商一致" />
       </view>
     </view>
-    <view class="category">
-      <text class="name">数量</text>
-      <view class="sele_num">
-        <text class="minus btn fa fa-minus" data-type="minus" catchtap="change_goods_number">-</text>
-        <input bindinput="" value="{{goodsNumberInput}}" class="hideInput" disabled/>
-        <text class="add btn fa fa-plus" data-type="add" catchtap="change_goods_number">+</text>
-      </view>
-    </view>
+
   </view>
 
   <view class="goods-detail-bot-btn">
@@ -124,3 +117,28 @@
   <view class="close_select_cls" data-type="{{mark}}" catchtap="closePageAnimate">关闭</view>
 
 </scroll-view>
+
+ 
+<!--屏幕背景变暗的背景  -->
+  <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+  <!--弹出框  -->
+  <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+
+    	<view class="goods">
+			<!-- 缩略图 -->
+				<image class="carts-image" src="{{url+goodsData.goods_titlepage}}" mode="aspectFill"/>
+        <text class="carts-price">{{goodsData.goods_price}}</text>
+			</view>
+      
+     <view class="category">
+      <text class="name">数量</text>
+      <view class="sele_num">
+        <text class="minus btn fa fa-minus" data-type="minus" catchtap="change_goods_number">-</text>
+        <input bindinput="" value="{{goodsNumberInput}}" class="hideInput" disabled/>
+        <text class="add btn fa fa-plus" data-type="add" catchtap="change_goods_number">+</text>
+      </view>
+    </view>
+      <button class='confirm' type="warn" bindtap="openCartPage">
+    确认
+  </button>
+</view>

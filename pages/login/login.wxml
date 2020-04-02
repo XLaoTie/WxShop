@@ -16,7 +16,7 @@
     <view class="weui-footer__links">
       <navigator url="" class="weui-footer__link"></navigator>
     </view>
-    <view class="weui-footer__text" style='font-size:0.8rem'>power by 小白接口</view>
+    <!-- <view class="weui-footer__text" style='font-size:0.8rem'>power by 小白接口</view> -->
   </view>
 </view>
 

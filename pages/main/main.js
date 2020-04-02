@@ -10,6 +10,11 @@ let [curPageNumber, curPageRequsetNumber] = [1, 1];//设置当前页面数量,�
 Page({
   data:
   {
+    showNav: false,
+    showHome: false,
+    showBrand: false,
+
+
     userInfo: {}, // 存放用户信息
     resultData: [], // 存放数据
     momentsData: [],

@@ -8,13 +8,17 @@
     "pages/mine/collect/collectDetail/collectDetail",
     "pages/goodsDetail/detail",
     "pages/main/main",
-    "pages/upload/upload"
+    "pages/upload/upload",
+    "pages/category/category",
+    "pages/mine/checkout/checkout",
+    "components/navbar/navbar"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "海鲜捞商城",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
   },
   "tabBar": {
     "backgroundColor": "#00008B",
@@ -35,7 +39,7 @@
         "selectedIconPath": "resource/images/tabbar_cart_selected.png"
       },
       {
-        "pagePath": "pages/main/main",
+        "pagePath": "pages/category/category",
         "text": "目录",
         "iconPath": "resource/images/tabbar_cart.png",
         "selectedIconPath": "resource/images/tabbar_cart_selected.png"

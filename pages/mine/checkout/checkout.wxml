@@ -1,0 +1,64 @@
+<navbar page-name="确认订单" show-nav="{{showNav}}" show-home="{{showHome}}"show-brand="{{showBrand}}"></navbar>
+<!-- 加入购物车 -->
+
+<view class="join_shopping_cart_view" >
+
+  <!-- address -->
+  <view class="address">
+    <view class="address-plus" wx:if="{{addressInfo == null}}" bindtap="chooseAddress">
+      <image src='/resource/images/plus1.png' style='width:60px;height:60px;'></image>
+      <text class="address-add">一键添加地址</text>
+    </view>
+    <view class="address-detail" wx:else="{{addressInfo != null}}" bindtap="chooseAddress">
+      <view class='address-detail-text'>
+        <text>{{addressInfo.userName}} <text class="address-phone">{{addressInfo.telNumber}} </text>\n</text>
+        <text style='font-size: 12px;'>{{addressInfo.provinceName}}{{addressInfo.cityName}}{{addressInfo.countyName}}{{addressInfo.detailInfo}}\n</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="goods_info" wx:for="{{checkoutData}}"wx:key="index">
+    <view class="img_view" wx:if="{{item.img.length>0}}">
+      <image src="{{imgurl+item.img}}" class="img" mode="aspectFit"></image>
+    </view>
+    <view class="item_info">
+      <text class="title">{{item.title}}</text>
+      <text class="selece_text_flag">已选</text>
+      <view class="row row-1">
+        <text class="text price">¥{{item.price}}</text>
+      </view>
+      <view class="row row-2">
+        <text class="text size">数量：</text>
+        <text class="text number">x{{item.quantity}}</text>
+      </view>
+    </view>
+  </view>
+  
+
+
+
+
+  <view class="select_class">
+    <!-- mark -->
+    <view class="category">
+      <text class="name">订单备注</text>
+      <view class="cls_view">
+        <textarea class="weui-textarea" name="content" value='{{content}}' style='height:60px;' bindinput="listenercontent" placeholder="选填，请先和商家协商一致" />
+      </view>
+    </view>
+  </view>
+
+  <view class="goods-detail-bot-btn">
+    <view class="goods-detail-bot-btn-Order-blank">
+      <text class='Order-blank-num'>共{{goodsnum}}件，</text>
+      <text class='Order-blank-price'>合计<text style='font-size:20px;'>{{sumPrice}}</text>.00</text>
+    </view>
+    <view class="goods-detail-bot-btn-Order" catchtap="details_bot_opts">
+      立即购买
+    </view>
+
+  </view>
+
+
+
+</view>

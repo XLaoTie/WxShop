@@ -8,6 +8,10 @@ let [curPageNumber, curPageRequsetNumber] = [1, 1]; //设置当前页面数量,�
 Page({
   //数据
   data: {
+    showNav:false,
+    showHome:true,
+
+
     userInfo: {},
 
     //轮播台数据

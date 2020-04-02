@@ -2,6 +2,7 @@
 
 App({
   onLaunch: function(){
+    let menuButtonObject = wx.getMenuButtonBoundingClientRect();
     this.getSystemInfo();
   },
   //获取用户信息
@@ -19,6 +20,8 @@ App({
   },
   //获取设备信息
   getSystemInfo : function(){
+    let menuButtonObject = wx.getMenuButtonBoundingClientRect();
+
     if(this.globalData.systemInfo){
       console.log('获取系统信息');
       return this.globalData.systemInfo;
@@ -29,6 +32,17 @@ App({
           success : (res) => {
             console.log('info',res);
             this.globalData.systemInfo = res;
+            //navbar
+            let statusBarHeight = res.statusBarHeight,
+              navTop = menuButtonObject.top,//胶囊按钮与顶部的距离
+              navHeight = statusBarHeight + menuButtonObject.height + (menuButtonObject.top - statusBarHeight) * 2;//导航高度
+            this.globalData.navHeight = navHeight;
+            this.globalData.navTop = navTop;
+            this.globalData.windowHeight = res.windowHeight;
+
+
+
+
             return this.globalData.systemInfo;
             // typeof cb == "function" && cb(_this.globalData.systemInfo);
           }
@@ -80,7 +94,9 @@ App({
   globalData: {
     userInfo: null,
     userOpenId:'undefined',
-  
+    navHeight:0,
+    navTop:0,
+    windowHeight:0,
     url:"http://localhost/snooke/index.php?r=WxShop/",
     imgUrl: 'http://localhost/snooke/uploads/image/',
     okayapiHost: "http://test_phalapi.com", // TODO: 配置成你所在的接口域名
